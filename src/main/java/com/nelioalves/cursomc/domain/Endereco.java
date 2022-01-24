@@ -8,6 +8,8 @@ import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Optional;
+
 @Entity
 public class Endereco implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -33,7 +35,7 @@ public class Endereco implements Serializable {
 
     public Endereco() {
     }
-
+    //CORREÇÃO
     public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
         this.id = id;
         this.logradouro = logradouro;
@@ -43,7 +45,6 @@ public class Endereco implements Serializable {
         this.cep = cep;
         this.cliente = cliente;
         this.cidade = cidade;
-
     }
 
     public Integer getId() {

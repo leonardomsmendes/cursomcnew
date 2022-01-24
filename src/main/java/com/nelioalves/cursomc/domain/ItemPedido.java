@@ -1,9 +1,7 @@
 package com.nelioalves.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -19,7 +17,7 @@ public class ItemPedido  implements Serializable {
 
     private Double desconto;
     private Integer quantidade;
-    private double preco;
+    private Double preco;
 
     public ItemPedido() {
     }
@@ -32,14 +30,27 @@ public class ItemPedido  implements Serializable {
         this.quantidade = quantidade;
         this.preco = preco;
     }
+
+    public double getSubTotal() {
+        return (preco - desconto) * quantidade;
+
+    }
     //isso foi criado é para ter acesso a classe Pedido e produto fora da classe ItemPedido
     @JsonIgnore//Proteger contra serialização Json cíclica
     public Pedido getPedido() {
         return id.getPedido();
     }
 
+    public void setPedido(Pedido pedido) {
+        id.setPedido(pedido);
+    }
+
     public Produto getProduto() {
         return id.getProduto();
+    }
+
+    public void setProduto(Produto produto) {
+        id.setProduto(produto);
     }
     public ItemPedidoPK getId() {
         return id;
@@ -62,10 +73,11 @@ public class ItemPedido  implements Serializable {
     }
 
     public void setQuantidade(Integer quantidade) {
+
         this.quantidade = quantidade;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
